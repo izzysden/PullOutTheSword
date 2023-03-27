@@ -1,42 +1,43 @@
 const animations = {
-  rainbow: `@keyframes rainbow{
-		100%,0%{
-			filter: drop-shadow(0 0 8px rgb(255,0,0));
-		}
-		8%{
-			filter: drop-shadow(0 0 8px rgb(255,127,0));
-		}
-		16%{
-			filter: drop-shadow(0 0 8px rgb(255,255,0));
-		}
-		25%{
-			filter: drop-shadow(0 0 8px rgb(127,255,0));
-		}
-		33%{
-			filter: drop-shadow(0 0 8px rgb(0,255,0));
-		}
-		41%{
-			filter: drop-shadow(0 0 8px rgb(0,255,127));
-		}
-		50%{
-			filter: drop-shadow(0 0 8px rgb(0,255,255));
-		}
-		58%{
-			filter: drop-shadow(0 0 8px rgb(0,127,255));
-		}
-		66%{
-			filter: drop-shadow(0 0 8px rgb(0,0,255));
-		}
-		75%{
-			filter: drop-shadow(0 0 8px rgb(127,0,255));
-		}
-		83%{
-			filter: drop-shadow(0 0 8px rgb(255,0,255));
-		}
-		91%{
-			filter: drop-shadow(0 0 8px rgb(255,0,127));
-		}
-}`,
+  rainbow: `@keyframes rainbow {
+    100%,
+    0% {
+      filter: drop-shadow(0 0 8px rgb(255, 0, 0));
+    }
+    8% {
+      filter: drop-shadow(0 0 8px rgb(255, 127, 0));
+    }
+    16% {
+      filter: drop-shadow(0 0 8px rgb(255, 255, 0));
+    }
+    25% {
+      filter: drop-shadow(0 0 8px rgb(127, 255, 0));
+    }
+    33% {
+      filter: drop-shadow(0 0 8px rgb(0, 255, 0));
+    }
+    41% {
+      filter: drop-shadow(0 0 8px rgb(0, 255, 127));
+    }
+    50% {
+      filter: drop-shadow(0 0 8px rgb(0, 255, 255));
+    }
+    58% {
+      filter: drop-shadow(0 0 8px rgb(0, 127, 255));
+    }
+    66% {
+      filter: drop-shadow(0 0 8px rgb(0, 0, 255));
+    }
+    75% {
+      filter: drop-shadow(0 0 8px rgb(127, 0, 255));
+    }
+    83% {
+      filter: drop-shadow(0 0 8px rgb(255, 0, 255));
+    }
+    91% {
+      filter: drop-shadow(0 0 8px rgb(255, 0, 127));
+    }
+  }`,
   shake: `@keyframes shake {
     100%,
     0% {
@@ -99,13 +100,64 @@ const animations = {
   show: `@keyframes show {
     0%,
     25% {
-      transform: translateX(0) translateY(0) rotate(0deg);
+      transform: translateX(10px) translateY(0) rotate(0deg);
     }
     50% {
-      transform: translateX(0) translateY(-300px) rotate(0deg);
+      transform: translateX(10px) translateY(-300px) rotate(0deg);
     }
     75% {
-      transform: translateX(20px) translateY(-300px) rotate(180deg);
+      transform: translateX(30px) translateY(-300px) rotate(180deg);
+    }
+  }`,
+  popIn: `@keyframes popIn {
+    0% {
+      transform: translateY(400px) rotate(-5deg) scale(0.9);
+    }
+    70% {
+      transform: translateY(-12.5px) rotate(-2.5deg) scale(1.1);
+    }
+    85% {
+      transform: translateY(-12.5px) rotate(2.5deg) scale(1.1);
+    }
+    100% {
+      transform: translateY(0) rotate(0) scale(1);
+    }
+  }
+  
+  animation: popIn 0.5s linear;
+  `,
+  popOut: `@keyframes popOut {
+    0% {
+      transform: translateY(0) scale(1);
+    }
+    25% {
+      transform: translateY(-25px) scale(1.1);
+    }
+    100% {
+      transform: translateY(400px) scale(0.9);
+    }
+  }
+
+  animation: popOut 1s ease-in-out;
+  `,
+  fadeIn: `@keyframes fadeIn {
+    from {
+      visibility: visible;
+      opacity: 0;
+    }
+    to {
+      visibility: visible;
+      opacity: 1;
+    }
+  }`,
+  fadeOut: `@keyframes fadeOut {
+    from {
+      visibility: visible;
+      opacity: 1;
+    }
+    to {
+      visibility: visible;
+      opacity: 0;
     }
   }`,
 };

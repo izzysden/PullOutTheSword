@@ -1,19 +1,37 @@
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { DustGif, SwordImg } from "../../assets/images";
+import { DustImg, SwordImg } from "../../assets/images";
 import { PullStateAtom, PullStateAtomType } from "../../atoms/pullState";
+import {
+  settingsStateAtom,
+  settingsStateAtomType,
+} from "../../atoms/settingsState";
 
 const Sword = () => {
   const [pullState] = useRecoilState<PullStateAtomType>(PullStateAtom);
+  const [settingsState] =
+    useRecoilState<settingsStateAtomType>(settingsStateAtom);
+
   return (
     <>
       <Wrapper
         src={SwordImg}
         alt="Sword"
+        isReduced={settingsState.isReduced}
         pulled={pullState.pulled}
         pulling={pullState.pulling}
+        width="400"
+        height="416"
       />
-      <Dust src={DustGif} alt="Dust" pulling={pullState.pulling} />
+      <Dust
+        src={DustImg}
+        alt="Dust"
+        isReduced={settingsState.isReduced}
+        pulled={pullState.pulled}
+        pulling={pullState.pulling}
+        width="200"
+        height="362"
+      />
     </>
   );
 };
@@ -21,48 +39,60 @@ const Sword = () => {
 export default Sword;
 
 interface WrapperProps {
-  pulled: boolean;
+  isReduced: boolean;
+  pulled: boolean | undefined;
   pulling: boolean;
 }
 
 const Wrapper = styled.img<WrapperProps>`
   transform: translateX(10px);
 
-  width: 400px;
-  height: 400px;
-
-  filter: brightness(110%) drop-shadow(0 0 8px red);
-  transition: filter 0.25s ease;
-
-  ${({ theme }) => theme.animations.rainbow}
-  animation: rainbow 10s linear infinite;
+  filter: drop-shadow(0 0 8px red);
 
   ${({ theme }) =>
     (props) =>
-      props.pulled
-        ? theme.animations.show + "animation: show 4s ease"
-        : props.pulling &&
-          theme.animations.pull +
-            `transform: translateX(26px) translateY(-12px) rotate(3deg);
-      animation: pull 4s ease-in-out`}
+      !props.isReduced &&
+      props.pulling &&
+      theme.animations.pull +
+        theme.animations.rainbow +
+        `transform: translateX(26px) translateY(-12px) rotate(3deg);
+      animation: pull 4s ease-in-out, rainbow 10s linear infinite;`}
+
+  ${({ theme }) =>
+    (props) =>
+      !props.isReduced &&
+      props.pulled === true &&
+      theme.animations.show +
+        `transform: translateX(30px) translateY(-300px) rotate(180deg);
+  animation: show 4s ease;`}
 `;
 
-interface DustProps {
-  pulling: boolean;
-}
-
-const Dust = styled.img<DustProps>`
+const Dust = styled.img<WrapperProps>`
   position: absolute;
   bottom: 200px;
 
-  transform: translateX(115px);
+  transform: translateX(125px);
 
-  opacity: ${(props) => (props.pulling ? 0.5 : 0)};
+  visibility: hidden;
 
-  transition: opacity 2s ease;
-
-  ${({ theme }) => theme.animations.rainbow}
-  animation: rainbow 10s linear infinite;
-
+  opacity: 0;
   pointer-events: none;
+
+  ${({ theme }) =>
+    (props) =>
+      !props.isReduced &&
+      props.pulling &&
+      theme.animations.rainbow +
+        theme.animations.fadeIn +
+        `animation: rainbow 10s linear infinite, fadeIn 3s linear;
+  visibility: visible;
+  opacity: 1;`}
+
+  ${({ theme }) =>
+    (props) =>
+      !props.isReduced &&
+      props.pulled !== undefined &&
+      theme.animations.rainbow +
+        theme.animations.fadeOut +
+        `animation: rainbow 10s linear infinite, fadeOut 1s linear;`}
 `;
