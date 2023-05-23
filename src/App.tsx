@@ -11,13 +11,27 @@ import { UserLoadResponseType } from "./types/user/load/response";
 import { UserStateAtom } from "./atoms/userState";
 import useStatistics from "./hooks/useStatistics";
 import { useEffect } from "react";
+import { SfxStateAtom, SfxStateAtomType } from "./atoms/sfxState";
 
 function App() {
+  const [sfxState] = useRecoilState<SfxStateAtomType>(SfxStateAtom);
   const [modalState] = useRecoilState<ModalStateAtomType>(ModalStateAtom);
   const [userState, setUserState] =
     useRecoilState<UserLoadResponseType>(UserStateAtom);
 
   const statisticsQuery = useStatistics(userState.username);
+
+  useEffect(() => {
+    const onFirstJoin = () => {
+      sfxState.Music.play();
+      if (sfxState.Music.currentTime > 0)
+        window.removeEventListener("mousemove", onFirstJoin);
+    };
+    window.addEventListener("mousemove", onFirstJoin);
+    return () => {
+      window.removeEventListener("mousemove", onFirstJoin);
+    }; // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (statisticsQuery.data && statisticsQuery.isStale === false)

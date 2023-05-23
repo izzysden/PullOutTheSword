@@ -30,6 +30,9 @@ const DialogueModal = ({ message }: DialogueModalProps) => {
       case "Too many requests, please try again later.":
         setTranslatedMessage([lang[language].tooManyRequest]);
         break;
+      case "429":
+        setTranslatedMessage([lang[language][429]]);
+        break;
     } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -55,4 +58,6 @@ const DialogueModal = ({ message }: DialogueModalProps) => {
 
 export default DialogueModal;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.text};
+`;

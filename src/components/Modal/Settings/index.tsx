@@ -8,6 +8,7 @@ import { SettingsTabList } from "../../../types/tab/settings";
 import { TabListType } from "../../../types/tab/list";
 import LangSelect from "./langSelect";
 import { lang, language } from "../../../libs/constants/lang";
+import BgmRange from "./BgmVolume";
 
 interface SettingsModalProps {
   tab?: SettingsTabList;
@@ -44,6 +45,7 @@ const SettingsModal = ({ tab }: SettingsModalProps) => {
       />
       {displayState === "general" && (
         <ul>
+          <BgmRange />
           <SfxRange />
           <ReducedMotionSwitch />
           <LangSelect />

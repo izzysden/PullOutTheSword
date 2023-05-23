@@ -52,6 +52,7 @@ export const lang = {
     na: "N/A",
     tpp: "Tries per Pull",
     sfxVolume: "Sfx Volume",
+    bgmVolume: "Bgm Volume",
     reducedMotion: "Reduced Motion",
     language: "Language",
     english: "English",
@@ -75,6 +76,7 @@ export const lang = {
     usernameGuide3: "Numbers (0-9)",
     usernameGuide4: "Underscores (_)",
     tooManyRequest: "Action is still on cooldown.",
+    429: "You've recently tried pulling.",
   },
   ko: {
     subHeading: "운이 좋으신가요?",
@@ -124,6 +126,7 @@ export const lang = {
     na: "해당 없음",
     tpp: "Tries per Pull",
     sfxVolume: "효과음 볼륨",
+    bgmVolume: "음악 볼륨",
     reducedMotion: "효과 최소화",
     language: "언어",
     english: "영어",
@@ -148,5 +151,6 @@ export const lang = {
     usernameGuide3: "숫자 (0-9)",
     usernameGuide4: "밑줄 문자 (_)",
     tooManyRequest: "아직 검을 뽑을 수 없습니다.",
+    429: "최근에 뽑기를 시도한 적이 있습니다.",
   },
 };

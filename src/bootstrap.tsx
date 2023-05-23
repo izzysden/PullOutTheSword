@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client";
-import { ReactQueryDevtools } from "react-query/devtools";
+//import { ReactQueryDevtools } from "react-query/devtools";
 import { RecoilRoot } from "recoil";
 import { ThemeProvider } from "styled-components";
 import App from "./App";
@@ -16,7 +16,9 @@ const queryClient = new QueryClient();
 root.render(
   <QueryClientProvider client={queryClient}>
     <RecoilRoot>
-      <ReactQueryDevtools initialIsOpen={true} />
+      {
+        //<ReactQueryDevtools initialIsOpen={true} />
+      }
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <App />

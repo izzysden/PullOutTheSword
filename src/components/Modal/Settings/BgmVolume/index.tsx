@@ -5,52 +5,47 @@ import { SfxStateAtom, SfxStateAtomType } from "../../../../atoms/sfxState";
 import { MenuImgs } from "../../../../assets/images";
 import { lang, language } from "../../../../libs/constants/lang";
 
-const SfxRange = () => {
+const BgmRange = () => {
   const [sfxState, setSfxState] =
     useRecoilState<SfxStateAtomType>(SfxStateAtom);
-  const sfxVolumeInput = useRef<HTMLInputElement>(null);
+  const bgmVolumeInput = useRef<HTMLInputElement>(null);
 
   return (
     <li>
-      <label htmlFor="sfxVolume">{lang[language].sfxVolume}</label>
+      <label htmlFor="bgmVolume">{lang[language].bgmVolume}</label>
       <Wrapper>
         <img src={MenuImgs.SfxImg} alt="" />
         <Range
           aria-label="sound effect volume"
-          id="sfxVolume"
+          id="bgmVolume"
           type="range"
           min="0"
           max="100"
-          defaultValue={sfxState.sfxVolume * 100}
-          ref={sfxVolumeInput}
+          defaultValue={sfxState.bgmVolume * 100}
+          ref={bgmVolumeInput}
           onInput={() =>
             setSfxState((prevState) => {
               return {
                 ...prevState,
-                sfxVolume: parseInt(sfxVolumeInput.current!.value) / 100,
+                bgmVolume: parseInt(bgmVolumeInput.current!.value) / 100,
               };
             })
           }
           onMouseUp={() => {
             setSfxState((prevState) => {
-              prevState.LoseSfx.volume = prevState.sfxVolume;
-              prevState.PullSfx.volume = prevState.sfxVolume;
-              prevState.RollSfx.volume = prevState.sfxVolume;
-              prevState.WinSfx.volume = prevState.sfxVolume;
+              prevState.Music.volume = prevState.bgmVolume;
               return prevState;
             });
-            sfxState.LoseSfx.currentTime = 0;
-            sfxState.LoseSfx.play();
-            localStorage.setItem("sfxVolume", sfxState.sfxVolume.toString());
+            localStorage.setItem("bgmVolume", sfxState.bgmVolume.toString());
           }}
         />
-        <span>{sfxState.sfxVolume}</span>
+        <span>{sfxState.bgmVolume}</span>
       </Wrapper>
     </li>
   );
 };
 
-export default SfxRange;
+export default BgmRange;
 
 const Wrapper = styled.div`
   display: flex;

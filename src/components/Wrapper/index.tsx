@@ -34,6 +34,8 @@ const Wrapper = ({ children }: IWrapperProps) => {
   const queryClient = useQueryClient();
   useEffect(() => {
     if (
+      pullState.pulled === undefined &&
+      !pullState.pulling &&
       userState.cooldown !== undefined &&
       (userState.cooldown instanceof Date
         ? userState.cooldown.getTime() >= new Date().getTime()
@@ -43,7 +45,32 @@ const Wrapper = ({ children }: IWrapperProps) => {
         userState.cooldown instanceof Date
           ? userState.cooldown.getTime()
           : Date.parse(userState.cooldown! as string);
-      setCooldown(Math.ceil((time - new Date().getTime()) / 1000) - 11);
+      setCooldown(Math.ceil((time - new Date().getTime()) / 1000));
+      const timer = setInterval(
+        () =>
+          setCooldown((prevState) => {
+            if (prevState < 2) {
+              clearInterval(timer);
+              return 0;
+            } else return prevState - 1;
+          }),
+        1000
+      );
+      return () => clearInterval(timer);
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userState.cooldown]);
+  useEffect(() => {
+    if (
+      userState.cooldown !== undefined &&
+      (userState.cooldown instanceof Date
+        ? userState.cooldown.getTime() >= new Date().getTime()
+        : Date.parse(userState.cooldown! as string) >= new Date().getTime())
+    ) {
+      const time =
+        userState.cooldown instanceof Date
+          ? userState.cooldown.getTime()
+          : Date.parse(userState.cooldown! as string);
+      setCooldown(Math.ceil((time - new Date().getTime()) / 1000));
       const timer = setInterval(
         () =>
           setCooldown((prevState) => {
@@ -85,14 +112,16 @@ const Wrapper = ({ children }: IWrapperProps) => {
           const data: PullSwordResponseType = await pullSword(
             userState.username
           );
-          if (data.message) {
+          if (data.pulled === undefined) {
             setPullState({
               pulling: false,
               pulled: undefined,
             });
             setModalState({
               title: lang[language].somethingWentWrong,
-              modalContents: <DialogueModal message={data.message} />,
+              modalContents: (
+                <DialogueModal message={data.message ? data.message : "429"} />
+              ),
             });
           } else {
             queryClient.invalidateQueries(["userQuery", userState.username]);
