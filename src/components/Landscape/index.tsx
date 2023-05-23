@@ -1,21 +1,21 @@
 import styled from "styled-components";
-import { CloudImg, GrassImg } from "../../assets/images";
+import { BackgroundImgs } from "../../assets/images";
 
 const Landscape = () => {
   return (
-    <Wrapper>
-      <Grass />
-      <Cloud />
+    <Wrapper aria-hidden="true">
+      <Grass aria-hidden="true" />
+      <Cloud aria-hidden="true" />
     </Wrapper>
   );
 };
 
 export default Landscape;
 
-const Grass = styled.aside`
+const Grass = styled.div`
   position: absolute;
 
-  background-image: url(${GrassImg});
+  background-image: url(${BackgroundImgs.GrassImg});
   background-position: 0 70vh;
   background-size: 30vw 30vh;
   background-repeat: repeat-x;
@@ -26,10 +26,10 @@ const Grass = styled.aside`
   z-index: 1;
 `;
 
-const Cloud = styled.aside`
+const Cloud = styled.div`
   position: absolute;
 
-  background-image: url(${CloudImg});
+  background-image: url(${BackgroundImgs.CloudImg});
   background-position: 0 0vh;
   background-size: contain;
   background-repeat: no-repeat;
@@ -38,8 +38,8 @@ const Cloud = styled.aside`
   min-height: 100vh;
 `;
 
-const Wrapper = styled.main`
-  background-color: #edfead;
+const Wrapper = styled.aside`
+  background-color: ${({ theme }) => theme.colors.subMain};
 
   min-width: 100vw;
   min-height: 100vh;

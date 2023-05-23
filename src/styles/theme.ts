@@ -55,13 +55,13 @@ const animations = {
   }`,
   pull: `@keyframes pull {
     0% {
-      transform: translateX(10px) translateY(0) rotate(0deg);
+      transform: translateX(10px) translateY(0px) rotate(0deg);
     }
     10% {
-      transform: translateX(8px) translateY(0) rotate(-1deg);
+      transform: translateX(8px) translateY(0px) rotate(-1deg);
     }
     20% {
-      transform: translateX(12px) translateY(0) rotate(1deg);
+      transform: translateX(12px) translateY(0px) rotate(1deg);
     }
     30% {
       transform: translateX(6px) translateY(-2px) rotate(-1.5deg);
@@ -100,7 +100,7 @@ const animations = {
   show: `@keyframes show {
     0%,
     25% {
-      transform: translateX(10px) translateY(0) rotate(0deg);
+      transform: translateX(10px) translateY(0px) rotate(0deg);
     }
     50% {
       transform: translateX(10px) translateY(-300px) rotate(0deg);
@@ -120,7 +120,7 @@ const animations = {
       transform: translateY(-12.5px) rotate(2.5deg) scale(1.1);
     }
     100% {
-      transform: translateY(0) rotate(0) scale(1);
+      transform: translateY(0px) rotate(0) scale(1);
     }
   }
   
@@ -128,7 +128,7 @@ const animations = {
   `,
   popOut: `@keyframes popOut {
     0% {
-      transform: translateY(0) scale(1);
+      transform: translateY(0px) scale(1);
     }
     25% {
       transform: translateY(-25px) scale(1.1);
@@ -160,6 +160,52 @@ const animations = {
       opacity: 0;
     }
   }`,
+  move: `@keyframes move {
+    100%,
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(8px);
+    }
+  }`,
+  highlight: `@keyframes highlight {
+    100%,
+    0% {
+    }
+    50% {
+      filter: drop-shadow(0 0 8px #edfead);
+    }
+  }`,
+  bounce: `@keyframes bounce {
+    10%,
+    0% {
+      transform: translateY(0);
+    }
+    5% {
+      transform: translateY(-10px);
+    }
+  }`,
+};
+
+const colors = {
+  main: "#ffffc9",
+  subMain: "#edfead",
+  white: "#fff",
+  black: "#000",
+  grey: "#e1e1e1",
+  darkGrey: "#e1e1e1",
+  translucent: "rgba(0, 0, 0, 0.1)",
+  lightTranslucent: "rgba(255, 255, 255, 0.4)",
+  darkTranslucent: "rgba(0, 0, 0, 0.4)",
+};
+
+const fontSizes = {
+  title: "48px",
+  subTitle: "32px",
+  text: "24px",
+  subText: "22px",
+  description: "16px",
 };
 
 const commons = {
@@ -168,6 +214,8 @@ const commons = {
 
 const theme = {
   animations,
+  colors,
+  fontSizes,
   commons,
 };
 

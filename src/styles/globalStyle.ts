@@ -1,16 +1,25 @@
 import { createGlobalStyle } from "styled-components";
+import { language } from "../libs/constants/lang";
 
 const GlobalStyle = createGlobalStyle`
     * {
         margin: 0;
         padding: 0;
         
-        font-family: "CB";
+        font-family: ${language === "ko" ? "MY" : "CB"};
         
         box-sizing: border-box;
-        
+
         ::-webkit-scrollbar {
-            display: none;
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            box-shadow: inset 0 0 16px white;
         }
     }
     

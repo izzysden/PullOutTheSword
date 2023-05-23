@@ -1,21 +1,22 @@
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { StoneImg } from "../../assets/images";
 import { PullStateAtom, PullStateAtomType } from "../../atoms/pullState";
+import { SwordImgs } from "../../assets/images";
+import { lang, language } from "../../libs/constants/lang";
 import {
-  settingsStateAtom,
-  settingsStateAtomType,
+  SettingsStateAtom,
+  SettingsStateAtomType,
 } from "../../atoms/settingsState";
 
 const Stone = () => {
   const [pullState] = useRecoilState<PullStateAtomType>(PullStateAtom);
   const [settingsState] =
-    useRecoilState<settingsStateAtomType>(settingsStateAtom);
-
+    useRecoilState<SettingsStateAtomType>(SettingsStateAtom);
   return (
     <Wrapper
-      src={StoneImg}
-      alt="Stone"
+      aria-hidden="true"
+      src={SwordImgs.StoneImg}
+      alt={lang[language].stone}
       isReduced={settingsState.isReduced}
       pulling={pullState.pulling}
       width="400"
@@ -26,12 +27,11 @@ const Stone = () => {
 
 export default Stone;
 
-interface WrapperProps {
+interface IWrapperProps {
   isReduced: boolean;
   pulling: boolean;
 }
-
-const Wrapper = styled.img<WrapperProps>`
+const Wrapper = styled.img<IWrapperProps>`
   position: absolute;
 
   ${({ theme }) => theme.commons.boxShadow}

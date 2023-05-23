@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Test your luck by pulling out a sword" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/192x192.png" />
@@ -13,14 +14,27 @@
     <style>
       @font-face {
         font-family: "CB";
-        src: url("./fonts/CaveatBrush-Regular.eot");
-        src: url("./fonts/CaveatBrush-Regular.eot?#iefix")
+        src: url("./fonts/CB/CaveatBrush-Regular.eot");
+        src: url("./fonts/CB/CaveatBrush-Regular.eot?#iefix")
             format("embedded-opentype"),
-          url("./fonts/CaveatBrush-Regular.woff2") format("woff2"),
-          url("./fonts/CaveatBrush-Regular.woff") format("woff"),
-          url("./fonts/CaveatBrush-Regular.ttf") format("truetype"),
-          url("./fonts/CaveatBrush-Regular.svg#CaveatBrush-Regular")
+          url("./fonts/CB/CaveatBrush-Regular.woff2") format("woff2"),
+          url("./fonts/CB/CaveatBrush-Regular.woff") format("woff"),
+          url("./fonts/CB/CaveatBrush-Regular.ttf") format("truetype"),
+          url("./fonts/CB/CaveatBrush-Regular.svg#CaveatBrush-Regular")
             format("svg");
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "MY";
+        src: url("./fonts/MY/MYYeongnamnu.eot");
+        src: url("./fonts/MY/MYYeongnamnu.eot?#iefix")
+            format("embedded-opentype"),
+          url("./fonts/MY/MYYeongnamnu.woff2") format("woff2"),
+          url("./fonts/MY/MYYeongnamnu.woff") format("woff"),
+          url("./fonts/MY/MYYeongnamnu.ttf") format("truetype"),
+          url("./fonts/MY/MYYeongnamnu.svg#MYYeongnamnu") format("svg");
         font-weight: normal;
         font-style: normal;
         font-display: swap;
@@ -30,5 +44,6 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <div id="modal"></div>
   </body>
 </html>

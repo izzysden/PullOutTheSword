@@ -1,19 +1,33 @@
 import { atom } from "recoil";
-import { UserStateAtomType } from "../userState";
 
-export interface settingsStateAtomType {
-  sfxVolume: number;
+export interface SettingsStateAtomType {
   isReduced: boolean;
-  speed: number;
-  user: UserStateAtomType;
+  offlineMode: boolean;
+  chance: number | "";
+  language: "en" | "ko";
 }
 
-export const settingsStateAtom = atom<settingsStateAtomType>({
+if (!localStorage.getItem("isReduced"))
+  localStorage.setItem(
+    "isReduced",
+    JSON.stringify(
+      window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true
+    )
+  );
+const isReduced = localStorage.getItem("isReduced")?.toLowerCase() === "true";
+
+if (!localStorage.getItem("lang"))
+  if (window.navigator.language.includes("ko"))
+    localStorage.setItem("lang", "ko");
+  else localStorage.setItem("lang", "en");
+const lang = localStorage.getItem("lang") as "en" | "ko";
+
+export const SettingsStateAtom = atom<SettingsStateAtomType>({
   key: "settingsState",
   default: {
-    sfxVolume: 0.5,
-    isReduced: true,
-    speed: 4,
-    user: { name: "", pfp: "", timesPulled: 0 },
+    isReduced: isReduced,
+    offlineMode: false,
+    chance: 1,
+    language: lang,
   },
 });

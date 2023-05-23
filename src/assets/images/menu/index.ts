@@ -1,0 +1,11 @@
+export { default as ButtonImg } from "./button.webp";
+export { default as EffectImg } from "./effect.webp";
+export { default as LanguageImg } from "./language.webp";
+export { default as LeaderboardImg } from "./leaderboard.webp";
+export { default as ManualImg } from "./manual.webp";
+export { default as OfflineImg } from "./offline.webp";
+export { default as OnlineImg } from "./online.webp";
+export { default as SettingsImg } from "./settings.webp";
+export { default as SfxImg } from "./sfx.webp";
+export { default as StatisticsImg } from "./statistics.webp";
+export { default as LockedImg } from "./locked.webp";

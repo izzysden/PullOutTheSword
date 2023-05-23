@@ -1,37 +1,144 @@
 import styled from "styled-components";
+import { MenuImgs } from "../../assets/images";
+import { useMemo, useState } from "react";
+import Dropdown from "../Dropdown";
+import { DropdownProps } from "../../types/dropdown";
+import { lang, language } from "../../libs/constants/lang";
 
 interface ButtonProps {
   labelText: string;
+  icon: string;
+  onClick?: () => void;
+  dropDown?: DropdownProps[];
 }
 
-const Button = ({ labelText }: ButtonProps) => {
-  return <Wrapper type="button">{labelText}</Wrapper>;
+const Button = ({ labelText, icon, onClick, dropDown }: ButtonProps) => {
+  const [dropdownState, setDropdownState] = useState<boolean | "focus">(false);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const buttonId = useMemo(() => labelText.split(" ")[0].toLowerCase(), []);
+
+  return dropDown ? (
+    <div
+      onMouseEnter={() => dropDown && setDropdownState(true)}
+      onMouseLeave={() =>
+        dropDown && dropdownState !== "focus" && setDropdownState(false)
+      }
+    >
+      <Dropdowns dropdownState={dropdownState as boolean} labelText={labelText}>
+        {dropDown.map((v, i) => (
+          <li key={`${buttonId}${i}`}>
+            <Dropdown
+              dropDownType={v.dropDownType}
+              labelText={v.labelText}
+              icon={v.icon}
+              onClick={v.onClick}
+              setDropdownState={
+                labelText === lang[language].onlineModeButton ||
+                labelText === lang[language].offlineModeButton
+                  ? setDropdownState
+                  : undefined
+              }
+            />
+          </li>
+        ))}
+      </Dropdowns>
+      <Wrapper type="button" onClick={onClick}>
+        {icon && <img src={icon} alt="" />}
+        {labelText}
+      </Wrapper>
+    </div>
+  ) : (
+    <Wrapper type="button" onClick={onClick}>
+      {icon && <img src={icon} alt="" />}
+      {labelText}
+    </Wrapper>
+  );
 };
 
 export default Button;
 
+interface DropdownsProps {
+  dropdownState: boolean;
+  labelText: string;
+}
+
+const Dropdowns = styled.ul<DropdownsProps>`
+  position: absolute;
+
+  display: flex;
+  flex-direction: column;
+
+  transition: clip 0.25s ease, opacity 0.5s ease;
+  will-change: clip, opacity;
+
+  @media screen and (max-width: 900px) {
+    left: 530px;
+
+    display: none;
+
+    ${(props) =>
+      (props.labelText === lang[language].offlineModeButton ||
+        props.labelText === lang[language].onlineModeButton) &&
+      `display: flex;
+  flex-direction: column;`}
+
+    ${(props) =>
+      props.dropdownState
+        ? "clip: rect(auto, auto, 15rem, auto); opacity: 1;"
+        : "clip: rect(auto, auto, 0, auto); opacity: 0;"}
+  }
+
+  @media screen and (min-width: 900px) {
+    bottom: 45px;
+
+    ${(props) =>
+      props.dropdownState
+        ? "clip: rect(0, auto, auto, auto); opacity: 1;"
+        : "clip: rect(15rem, auto, auto, auto); opacity: 0;"}
+  }
+
+  button,
+  fieldset {
+    margin-bottom: 8px;
+  }
+`;
+
 const Wrapper = styled.button`
   background-color: transparent;
+  background-image: url(${MenuImgs.ButtonImg});
 
   padding: 8px;
+  padding-left: 16px;
 
   width: 200px;
-  height: 100%;
+  height: 48px;
 
-  color: #edfead;
-  font-size: 24px;
+  display: flex;
+  align-items: center;
+
+  color: ${({ theme }) => theme.colors.black};
+  font-size: ${({ theme }) => theme.fontSizes.text};
 
   cursor: pointer;
-  filter: drop-shadow(0 0 8px #aaa);
-  border: 2px solid #ffffc9;
+  border: none;
   border-radius: 10px;
-  transition: background-color 0.25s ease, color 0.25s ease, filter 0.25s ease;
+  transition: color 0.25s ease;
 
   :hover {
-    background-color: white;
+    color: ${({ theme }) => theme.colors.white};
 
-    color: black;
+    img {
+      filter: invert(1);
+    }
+  }
 
-    filter: drop-shadow(0 0 8px white);
+  img {
+    margin-right: 8px;
+
+    filter: invert(0);
+
+    transition: filter 0.25s ease;
+    will-change: filter;
   }
 `;

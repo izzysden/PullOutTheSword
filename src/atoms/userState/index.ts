@@ -1,12 +1,15 @@
 import { atom } from "recoil";
+import { UserLoadResponseType } from "../../types/user/load/response";
 
-export interface UserStateAtomType {
-  name: string;
-  pfp: string;
-  timesPulled: number;
-}
+const username = localStorage.getItem("username");
 
-export const UserStateAtom = atom<UserStateAtomType>({
+export const UserStateAtom = atom<UserLoadResponseType>({
   key: "userState",
-  default: { name: "", pfp: "", timesPulled: 0 },
+  default: {
+    username: username ? username : "",
+    tries: 0,
+    pulls: 0,
+    cooldown: undefined,
+    tpp: 0,
+  },
 });
