@@ -17,9 +17,9 @@ const ResultModal = () => {
     <div>
       <List>
         <li>
-          {`${lang[language].statistics2}: ${userState.tries - 1} -> ${
-            userState.tries
-          }`}
+          {`${lang[language].statistics2}: ${
+            userState.tries ? userState.tries - 1 : userState.tries
+          } -> ${userState.tries}`}
         </li>
         <li>
           {pullState.pulled === true

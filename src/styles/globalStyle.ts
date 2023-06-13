@@ -24,7 +24,10 @@ const GlobalStyle = createGlobalStyle`
     }
     
     html, body {
+        position: relative;
+
         max-width: 100%;
+        max-height: 100%;
         
         overflow: hidden;
     }
