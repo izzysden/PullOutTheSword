@@ -69,6 +69,7 @@ export const lang = {
     availableIn: "Available in",
     seconds: "s",
     somethingWentWrong: "Warning!",
+    usernameIsNotSet: "Username is not set.",
     inappropriateUsername: "Inappropriate Username!",
     invalidUsername: "Invalid Username!",
     usernameGuide1: "The username must contain 4 to 16 characters including...",
@@ -143,6 +144,7 @@ export const lang = {
     availableIn: "다시 검을 뽑기까지",
     seconds: "초",
     somethingWentWrong: "경고!",
+    usernameIsNotSet: "사용자 이름이 설정되지 않았습니다.",
     inappropriateUsername: "사용자 이름이 부적절합니다!",
     invalidUsername: "사용자 이름이 잘못되었습니다!",
     usernameGuide1:

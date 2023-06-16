@@ -119,9 +119,7 @@ const Wrapper = ({ children }: IWrapperProps) => {
             });
             setModalState({
               title: lang[language].somethingWentWrong,
-              modalContents: (
-                <DialogueModal message={data.message ? data.message : "429"} />
-              ),
+              modalContents: <DialogueModal message={data.message || "429"} />,
             });
           } else {
             queryClient.invalidateQueries(["userQuery", userState.username]);

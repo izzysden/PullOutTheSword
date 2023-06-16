@@ -15,6 +15,9 @@ const DialogueModal = ({ message }: DialogueModalProps) => {
 
   useEffect(() => {
     switch (message) {
+      case "URI Not Found!":
+        setTranslatedMessage([lang[language].usernameIsNotSet]);
+        break;
       case "Inappropriate Username.":
         setTranslatedMessage([lang[language].inappropriateUsername]);
         break;
